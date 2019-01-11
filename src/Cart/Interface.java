@@ -68,6 +68,7 @@ public class Interface extends JFrame{
             double orangePrice = 2.10;
             String selectedItem = (String) products.getSelectedItem();
             model.addElement(selectedItem);
+            chosenList.setSelectedIndex(0);
             switch (selectedItem) {
                 case "Ябълка": sum+= applePrice; break;
                 case "Круша": sum+= pearPrice; break;
@@ -96,6 +97,7 @@ public class Interface extends JFrame{
             int chosenIndex = chosenList.getSelectedIndex();
             if (chosenIndex >= 0) {
                 model.removeElementAt(chosenIndex);
+                chosenList.setSelectedIndex(0);
                 switch (selectedItem) {
                     case "Ябълка": sum-= applePrice; break;
                     case "Круша": sum-= pearPrice; break;
