@@ -11,11 +11,12 @@ public class Interface extends JFrame{
     private JTextArea pricesTextArea = new JTextArea();
     private JScrollPane productsPrices = new JScrollPane(pricesTextArea);
     private JLabel userChoice = new JLabel("Вие избрахте:");
-    private JTextArea choiceTextArea = new JTextArea();
-    private JScrollPane userScrollPane = new JScrollPane(choiceTextArea);
     private JButton buy = new JButton("Buy");
     private JButton remove = new JButton("Remove");
     private JButton finish = new JButton("Finish");
+    private JList<String> chosenList = new JList<>();
+    private DefaultListModel<String> model = new DefaultListModel<>();
+    private JScrollPane listScrollPane = new JScrollPane(chosenList);
 
     public Interface() {
         super("Shopping Cart");
@@ -42,7 +43,8 @@ public class Interface extends JFrame{
         container.add(productsPrices);
 
         container.add(userChoice);
-        container.add(userScrollPane);
+        container.add(listScrollPane);
+        chosenList.setModel(model);
 
         container.add(buy);
         buy.addActionListener(new buyEventListener());
@@ -56,16 +58,16 @@ public class Interface extends JFrame{
 
     class buyEventListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            double applePrice = 2;
-            double pearPrice = 2.2;
-            double strawberryPrice = 3.1;
-            double apricotPrice = 2.3;
-            double peachPrice = 3;
-            double pineapplePrice = 2.5;
-            double plumPrice = 2.6;
-            double orangePrice = 2.1;
+            double applePrice = 2.00;
+            double pearPrice = 2.20;
+            double strawberryPrice = 3.10;
+            double apricotPrice = 2.30;
+            double peachPrice = 3.00;
+            double pineapplePrice = 2.50;
+            double plumPrice = 2.60;
+            double orangePrice = 2.10;
             String selectedItem = (String) products.getSelectedItem();
-            choiceTextArea.append(selectedItem + "\n");
+            model.addElement(selectedItem);
             switch (selectedItem) {
                 case "Ябълка": sum+= applePrice; break;
                 case "Круша": sum+= pearPrice; break;
@@ -82,25 +84,31 @@ public class Interface extends JFrame{
 
     class removeEventListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            double applePrice = 2;
-            double pearPrice = 2.2;
-            double strawberryPrice = 3.1;
-            double apricotPrice = 2.3;
-            double peachPrice = 3;
-            double pineapplePrice = 2.5;
-            double plumPrice = 2.6;
-            double orangePrice = 2.1;
+            double applePrice = 2.00;
+            double pearPrice = 2.20;
+            double strawberryPrice = 3.10;
+            double apricotPrice = 2.30;
+            double peachPrice = 3.00;
+            double pineapplePrice = 2.50;
+            double plumPrice = 2.60;
+            double orangePrice = 2.10;
             String selectedItem = (String) products.getSelectedItem();
-            switch (selectedItem) {
-                case "Ябълка": sum-= applePrice; break;
-                case "Круша": sum-= pearPrice; break;
-                case "Ягода": sum-= strawberryPrice; break;
-                case "Кайсия": sum-= apricotPrice; break;
-                case "Праскова": sum-= peachPrice; break;
-                case "Ананас": sum-= pineapplePrice; break;
-                case "Слива": sum-= plumPrice; break;
-                case "Портокал": sum-= orangePrice; break;
-                default: break;
+            int chosenIndex = chosenList.getSelectedIndex();
+            if (chosenIndex >= 0) {
+                model.removeElementAt(chosenIndex);
+                switch (selectedItem) {
+                    case "Ябълка": sum-= applePrice; break;
+                    case "Круша": sum-= pearPrice; break;
+                    case "Ягода": sum-= strawberryPrice; break;
+                    case "Кайсия": sum-= apricotPrice; break;
+                    case "Праскова": sum-= peachPrice; break;
+                    case "Ананас": sum-= pineapplePrice; break;
+                    case "Слива": sum-= plumPrice; break;
+                    case "Портокал": sum-= orangePrice; break;
+                    default: break;
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Количката е празна!\nКупене нещо, моля!", "Error", JOptionPane.PLAIN_MESSAGE);
             }
         }
     }
