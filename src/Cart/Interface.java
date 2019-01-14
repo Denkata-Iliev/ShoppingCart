@@ -16,6 +16,7 @@ public class Interface extends JFrame{
     private JButton buy = new JButton("Buy");
     private JButton remove = new JButton("Remove");
     private JButton finish = new JButton("Finish");
+    private JButton removeAll = new JButton("Remove All");
     private JList<String> chosenList = new JList<>();
     private DefaultListModel<String> model = new DefaultListModel<>();
     private JScrollPane listScrollPane = new JScrollPane(chosenList);
@@ -54,6 +55,8 @@ public class Interface extends JFrame{
         remove.addActionListener(new removeEventListener());
         container.add(finish);
         finish.addActionListener(new finishEventListener());
+        container.add(removeAll);
+        removeAll.addActionListener(new removeAllEventListener());
     }
 
     private double sum = 0;
@@ -121,6 +124,13 @@ public class Interface extends JFrame{
         public void actionPerformed(ActionEvent e) {
             String tellSum = "Дължима сума: " + formatSum.format(sum) + "лв.";
             JOptionPane.showMessageDialog(null,tellSum,"Total Sum",JOptionPane.PLAIN_MESSAGE);
+        }
+    }
+
+    class removeAllEventListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            model.removeAllElements();
+            sum -= sum;
         }
     }
 }
