@@ -3,8 +3,10 @@ package Cart;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.text.DecimalFormat;
 
 public class Interface extends JFrame{
+    private static DecimalFormat formatSum = new DecimalFormat("#.##");
     private JLabel label = new JLabel("Продукти:");
     private JComboBox<String> products = new JComboBox();
     private JLabel pricesLabel = new JLabel("Цени:");
@@ -93,12 +95,12 @@ public class Interface extends JFrame{
             double pineapplePrice = 2.50;
             double plumPrice = 2.60;
             double orangePrice = 2.10;
-            String selectedItem = (String) products.getSelectedItem();
             int chosenIndex = chosenList.getSelectedIndex();
+            String listSelectedItem = chosenList.getSelectedValue();
             if (chosenIndex >= 0) {
                 model.removeElementAt(chosenIndex);
                 chosenList.setSelectedIndex(0);
-                switch (selectedItem) {
+                switch (listSelectedItem) {
                     case "Ябълка": sum-= applePrice; break;
                     case "Круша": sum-= pearPrice; break;
                     case "Ягода": sum-= strawberryPrice; break;
@@ -110,15 +112,15 @@ public class Interface extends JFrame{
                     default: break;
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Количката е празна!\nКупене нещо, моля!", "Error", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Количката е празна!\nКупете нещо, моля!", "Empty Cart", JOptionPane.PLAIN_MESSAGE);
             }
         }
     }
 
     class finishEventListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            String tellSum = "Дължима сума: " + sum + "лв.";
-            JOptionPane.showMessageDialog(null,tellSum,"Output",JOptionPane.PLAIN_MESSAGE);
+            String tellSum = "Дължима сума: " + formatSum.format(sum) + "лв.";
+            JOptionPane.showMessageDialog(null,tellSum,"Total Sum",JOptionPane.PLAIN_MESSAGE);
         }
     }
 }
