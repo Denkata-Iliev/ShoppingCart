@@ -5,7 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.text.DecimalFormat;
 
-public class Interface extends JFrame{
+public class Interface extends JFrame {
     private static DecimalFormat formatSum = new DecimalFormat("#.##");
     private JLabel labelProducts = new JLabel("Продукти:");
     private JComboBox<String> productsComboBox = new JComboBox();
@@ -27,7 +27,7 @@ public class Interface extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Container container = this.getContentPane();
-        container.setLayout(new GridLayout(5,2,2,2));
+        container.setLayout(new GridLayout(5, 2, 2, 2));
 
         container.add(labelProducts);
         container.add(productsComboBox);
@@ -75,15 +75,32 @@ public class Interface extends JFrame{
             modelList.addElement(selectedItem);
             userChoiceList.setSelectedIndex(0);
             switch (selectedItem) {
-                case "Ябълка": sum+= applePrice; break;
-                case "Круша": sum+= pearPrice; break;
-                case "Ягода": sum+= strawberryPrice; break;
-                case "Кайсия": sum+= apricotPrice; break;
-                case "Праскова": sum+= peachPrice; break;
-                case "Ананас": sum+= pineapplePrice; break;
-                case "Слива": sum+= plumPrice; break;
-                case "Портокал": sum+= orangePrice; break;
-                default: break;
+                case "Ябълка":
+                    sum += applePrice;
+                    break;
+                case "Круша":
+                    sum += pearPrice;
+                    break;
+                case "Ягода":
+                    sum += strawberryPrice;
+                    break;
+                case "Кайсия":
+                    sum += apricotPrice;
+                    break;
+                case "Праскова":
+                    sum += peachPrice;
+                    break;
+                case "Ананас":
+                    sum += pineapplePrice;
+                    break;
+                case "Слива":
+                    sum += plumPrice;
+                    break;
+                case "Портокал":
+                    sum += orangePrice;
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -104,15 +121,32 @@ public class Interface extends JFrame{
                 modelList.removeElementAt(chosenIndex);
                 userChoiceList.setSelectedIndex(0);
                 switch (listSelectedItem) {
-                    case "Ябълка": sum-= applePrice; break;
-                    case "Круша": sum-= pearPrice; break;
-                    case "Ягода": sum-= strawberryPrice; break;
-                    case "Кайсия": sum-= apricotPrice; break;
-                    case "Праскова": sum-= peachPrice; break;
-                    case "Ананас": sum-= pineapplePrice; break;
-                    case "Слива": sum-= plumPrice; break;
-                    case "Портокал": sum-= orangePrice; break;
-                    default: break;
+                    case "Ябълка":
+                        sum -= applePrice;
+                        break;
+                    case "Круша":
+                        sum -= pearPrice;
+                        break;
+                    case "Ягода":
+                        sum -= strawberryPrice;
+                        break;
+                    case "Кайсия":
+                        sum -= apricotPrice;
+                        break;
+                    case "Праскова":
+                        sum -= peachPrice;
+                        break;
+                    case "Ананас":
+                        sum -= pineapplePrice;
+                        break;
+                    case "Слива":
+                        sum -= plumPrice;
+                        break;
+                    case "Портокал":
+                        sum -= orangePrice;
+                        break;
+                    default:
+                        break;
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Количката е празна!\nКупете нещо, моля!", "Empty Cart", JOptionPane.PLAIN_MESSAGE);
@@ -123,7 +157,7 @@ public class Interface extends JFrame{
     class finishEventListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String tellSum = "Дължима сума: " + formatSum.format(sum) + "лв.";
-            JOptionPane.showMessageDialog(null,tellSum,"Total Sum",JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, tellSum, "Total Sum", JOptionPane.PLAIN_MESSAGE);
         }
     }
 
